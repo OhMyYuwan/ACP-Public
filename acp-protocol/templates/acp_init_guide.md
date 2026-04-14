@@ -89,7 +89,12 @@ profiles:
 ```
 
 If `capability` is enabled, create `.acp/capability/`.
-If `support` is enabled, create `.acp/support/`.
+If `support` is enabled, create `.acp/support/` and author `.acp/support/AGENT.md`
+using `acp_support_agent_template.md` as the starting point.
+
+The `quick_entry` block at the top of `AGENT.md` is the first thing agents read
+when entering the project. Fill it in accurately — especially `active_request_id`
+when a Request is in progress.
 
 ---
 

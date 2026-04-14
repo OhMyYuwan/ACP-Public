@@ -78,10 +78,10 @@ intake:
           When present, read it first — it provides enough context to complete
           bootstrap routing without reading the full AGENT.md body.
         do:
-          - check if AGENT.md begins with a fenced block declaring role: quick_entry
+          - check if AGENT.md begins with a fenced YAML block with root key quick_entry
           - if quick_entry block is present:
               - read the quick_entry block only
-              - extract project summary, profiles, active_request_id, entry_order
+              - extract project_name, project_type, capabilities, active_request_id, status, next_step
               - if active_request_id is present: surface it to the user immediately
               - defer reading AGENT.md body until user intent is narrower
           - if quick_entry block is absent:

@@ -329,11 +329,33 @@ change:
     - save Change to .acp/kernel/changes/{change_id}.yaml
 
   git_binding_rules:
-    - done Change MUST include git_refs in local development mode
-    - open Change MAY temporarily omit git_refs
-    - one Change SHOULD correspond to one logical unit of work
-    - squash and merge commits are both valid — Kernel history governs, not git history
-    - git history does NOT replace Kernel Change history
+    description: >
+      Git workflow integration for ACP-managed projects.
+      See host/git_workflow_policy.md for full details.
+    
+    branch_strategy:
+      - create feature branch when Change is created
+      - naming format: <username>/<type>/<description>
+      - branch types: feature, bugfix, hotfix, refactor, docs, test, chore
+      - record branch name in Change object's branch field (optional but recommended)
+      - work on branch until Change is done
+    
+    commit_message_format:
+      - "follow Conventional Commits: <type>(<scope>): <subject>"
+      - "types: feat, fix, docs, style, refactor, perf, test, chore, revert"
+      - "example: feat(observation): implement AX element tree extraction"
+    
+    change_git_binding:
+      - done Change MUST include git_refs in local development mode
+      - open Change MAY temporarily omit git_refs
+      - one Change SHOULD correspond to one logical unit of work
+      - squash and merge commits are both valid — Kernel history governs, not git history
+      - git history does NOT replace Kernel Change history
+    
+    merge_strategy:
+      - personal branch to develop: squash and merge (keep history clean)
+      - develop to main: merge commit (preserve full history)
+      - hotfix to main: merge commit (traceability required)
 
   must_not:
     - close a Change without linking it to both Request and Plan
